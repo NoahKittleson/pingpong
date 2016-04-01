@@ -3,9 +3,22 @@ $(document).ready(function() {
     event.preventDefault();
     $(".output").text("");
     var limit = parseInt($("form #number").val());
-    countTo(limit);
-  })
+    if (errorCheck(limit)) {
+      countTo(limit);
+    }
+  });
 });
+
+function errorCheck(max) {
+  if (!max) {
+    $(".output").append("Error: Bad Input");
+    return false;
+  } else if (max <= 0) {
+    $(".output").append("Error: Negative Number");
+    return false;
+  }
+  return true;
+}
 
 function countTo (max) {
   for (var currentNumber = 1; currentNumber <= max; currentNumber++) {
